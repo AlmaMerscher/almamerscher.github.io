@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Alma-Sophia Merscher" } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-nav">
+      <div class="wrap nav-inner">
+        <a href="/" class="brand">Alma-Sophia Merscher</a>
+        <nav class="links">
+          <a href="/">Home</a>
+          <a href="/blog">Blog</a>
+          <a href="/speaking">Speaking</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap foot-inner">
+        <span>&copy; {new Date().getFullYear()} Alma-Sophia Merscher</span>
+        <div class="foot-links">
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      .site-nav {
+        border-bottom: 1px solid var(--text);
+      }
+      .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .brand {
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .links {
+        display: flex;
+        gap: 1.4rem;
+      }
+      .links a {
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .links a:hover {
+        color: var(--accent-rust);
+      }
+      .site-foot {
+        border-top: 1px solid var(--border);
+        margin-top: 4rem;
+      }
+      .foot-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .foot-links {
+        display: flex;
+        gap: 1.2rem;
+      }
+      .foot-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+      }
+      .foot-links a:hover {
+        color: var(--accent-rust);
+      }
+    </style>
+  </body>
+</html>

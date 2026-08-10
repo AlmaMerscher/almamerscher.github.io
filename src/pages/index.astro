@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+
+const catColor: Record<string, string> = {
+  blog: "var(--cat-1)",
+  speaking: "var(--cat-4)",
+};
+---
+
+<Layout title="Alma-Sophia Merscher">
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow" style="color: var(--accent-gold);">Welcome</p>
+      <h1>A short, clear headline goes here</h1>
+      <p class="tagline">One or two sentences introducing you and what this site is about.</p>
+      <a href="/blog" class="button">Read the blog</a>
+    </div>
+  </section>
+
+  <section class="wrap featured">
+    <h2 class="section-title">Latest</h2>
+    <div class="grid">
+      {
+        posts.map((post) => (
+          <a class="card" href={`/blog/${post.id}`}>
+            <p class="eyebrow" style={`color:${catColor[post.data.category]}`}>
+              {post.data.category}
+            </p>
+            <h3>{post.data.title}</h3>
+            <p class="desc">{post.data.description}</p>
+          </a>
+        ))
+      }
+      {posts.length === 0 && <p class="empty">No posts yet — add one in src/content/blog.</p>}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(20, 15, 10, 0.15) 0%, rgba(20, 15, 10, 0.85) 70%, var(--hero-bg-1) 100%),
+      radial-gradient(ellipse at 25% 15%, var(--hero-bg-2) 0%, var(--hero-bg-1) 70%);
+    /* To use a real photo: add background-image: url('/images/hero.jpg'); background-size: cover; background-position: center; above the gradient */
+    color: var(--hero-text);
+    padding: 6rem 1.5rem;
+  }
+  .hero-inner {
+    max-width: 42ch;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    color: var(--hero-text);
+    margin-bottom: 1rem;
+  }
+  .tagline {
+    color: var(--hero-text-muted);
+    margin: 0 0 1.6rem;
+    font-size: 1.05rem;
+  }
+  .featured {
+    padding: 3.5rem 1.5rem 4rem;
+  }
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .card:hover {
+    border-color: var(--accent-rust);
+  }
+  .card h3 {
+    font-size: 1.1rem;
+    margin: 0.2rem 0 0.5rem;
+  }
+  .desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .empty {
+    color: var(--text-muted);
+  }
+</style>

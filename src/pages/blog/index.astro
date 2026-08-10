@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => p.data.category === "blog")
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Blog — Alma-Sophia Merscher">
+  <section class="wrap page">
+    <h1>Blog</h1>
+    <ul class="list">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`}>
+              <span class="date">{post.data.date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+      {posts.length === 0 && <p class="empty">No posts yet.</p>}
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .page {
+    padding: 3rem 1.5rem 4rem;
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .list a {
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+  }
+  .date {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-rust);
+    font-weight: 700;
+  }
+  .list h2 {
+    font-size: 1.4rem;
+    margin: 0.4rem 0 0.4rem;
+  }
+  .list p {
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .list a:hover h2 {
+    color: var(--accent-rust);
+  }
+  .empty {
+    color: var(--text-muted);
+  }
+</style>

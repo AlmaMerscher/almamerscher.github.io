@@ -1,0 +1,83 @@
+:root {
+  --bg: #fffdf8;
+  --text: #1c1712;
+  --text-muted: #8a7a63;
+  --border: #ecdfc7;
+  --accent-gold: #e0a83f;
+  --accent-rust: #b5502e;
+  --hero-bg-1: #1a120b;
+  --hero-bg-2: #241a10;
+  --hero-text: #fbf4e8;
+  --hero-text-muted: #cbbca7;
+
+  --cat-1: #b5502e;
+  --cat-2: #a3781f;
+  --cat-3: #8c5a2e;
+  --cat-4: #96311f;
+
+  --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --font-sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --content-width: 900px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  line-height: 1.15;
+  text-wrap: balance;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrap {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 0 0.7rem;
+}
+
+.button {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  background: var(--accent-rust);
+  color: #fdf4ee;
+  text-decoration: none;
+}
+
+.button:hover {
+  opacity: 0.9;
+}

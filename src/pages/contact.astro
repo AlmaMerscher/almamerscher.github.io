@@ -37,19 +37,26 @@ import Layout from "../layouts/Layout.astro";
     flex-direction: column;
     gap: 1rem;
   }
+  /* wraps to two lines rather than overflowing when a real URL is long */
   .list li {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.15rem 1rem;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.8rem;
   }
   .k {
     color: var(--text-muted);
     font-size: 0.85rem;
+    flex: none;
   }
   .list a {
     text-decoration: none;
     color: var(--accent-rust);
     font-weight: 500;
+    overflow-wrap: anywhere;
+    text-align: right;
   }
 </style>

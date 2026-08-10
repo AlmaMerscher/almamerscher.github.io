@@ -1,14 +1,19 @@
 :root {
   --bg: #fffdf8;
   --text: #1c1712;
-  --text-muted: #8a7a63;
+  /* #8a7a63 was only 4.09:1 on --bg; this clears the 4.5 minimum */
+  --text-muted: #7f6f55;
   --border: #ecdfc7;
   --accent-gold: #e0a83f;
   --accent-rust: #b5502e;
-  --hero-bg-1: #1a120b;
-  --hero-bg-2: #241a10;
-  --hero-text: #fbf4e8;
-  --hero-text-muted: #cbbca7;
+  /* deeper rust for small text: plain rust on the oat hero is only ~3.9:1 */
+  --accent-rust-deep: #8a3a1f;
+
+  /* Hero is one step deeper than --bg so the band still reads as its own block */
+  --hero-bg-1: #eadfc9;
+  --hero-bg-1-rgb: 234, 223, 201;
+  --hero-text: #1c1712;
+  --hero-text-muted: #6b5c46;
 
   --cat-1: #b5502e;
   --cat-2: #a3781f;

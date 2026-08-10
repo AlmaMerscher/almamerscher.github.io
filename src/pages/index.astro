@@ -14,6 +14,24 @@ const catColor: Record<string, string> = {
 
 <Layout title="Alma-Sophia Merscher">
   <section class="hero">
+    <picture>
+      <source
+        media="(min-width: 1001px)"
+        srcset="/images/alma-hero-420.webp 420w, /images/alma-hero-840.webp 840w"
+        sizes="420px"
+      />
+      <img
+        class="hero-figure"
+        src="/images/alma-portrait-320.webp"
+        srcset="/images/alma-portrait-320.webp 320w, /images/alma-portrait-640.webp 640w"
+        sizes="240px"
+        width="320"
+        height="401"
+        alt="Alma-Sophia Merscher"
+        fetchpriority="high"
+      />
+    </picture>
+    <div class="hero-scrim"></div>
     <div class="wrap hero-inner">
       <p class="eyebrow" style="color: var(--accent-gold);">Welcome</p>
       <h1>A short, clear headline goes here</h1>
@@ -42,16 +60,88 @@ const catColor: Record<string, string> = {
 </Layout>
 
 <style>
+  /* Photo sits to the right, cropped by the band; scrim keeps the headline readable. */
   .hero {
-    background:
-      linear-gradient(180deg, rgba(20, 15, 10, 0.15) 0%, rgba(20, 15, 10, 0.85) 70%, var(--hero-bg-1) 100%),
-      radial-gradient(ellipse at 25% 15%, var(--hero-bg-2) 0%, var(--hero-bg-1) 70%);
-    /* To use a real photo: add background-image: url('/images/hero.jpg'); background-size: cover; background-position: center; above the gradient */
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    /* Flat, and the scrim fades from this exact colour. A gradient here shows through
+       where the scrim fades out and reads as a seam down the middle of the band. */
+    background: var(--hero-bg-1);
     color: var(--hero-text);
-    padding: 6rem 1.5rem;
+    padding: 5rem 1.5rem;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
   }
+  /* display:contents so the <img> itself is the flex item — otherwise the <picture>
+     wrapper swallows `order` and the photo can't be moved below the text on mobile. */
+  .hero picture {
+    display: contents;
+  }
+  .hero-figure {
+    position: absolute;
+    top: 0;
+    right: max(1.5rem, calc(50% - 450px));
+    height: 1040px;
+    width: auto;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      100deg,
+      var(--hero-bg-1) 0%,
+      rgba(26, 18, 11, 0.94) 34%,
+      rgba(26, 18, 11, 0.6) 52%,
+      rgba(26, 18, 11, 0) 70%
+    );
+  }
+  /* width:100% so the flex item keeps .wrap's 900px column instead of shrinking to content */
   .hero-inner {
-    max-width: 42ch;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  /* rem, not ch: ch resolves against the h1's own ~54px font-size and blows past the figure */
+  .hero h1 {
+    max-width: 26rem;
+  }
+  .hero .tagline {
+    max-width: 26rem;
+  }
+
+  /* Below 1000px there is no room for text and figure side by side. Overlapping them
+     pushes the head off the top of the band, so stack instead: text, then a
+     head-and-shoulders crop at the lower right. No scrim needed. */
+  @media (max-width: 1000px) {
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 0;
+      padding: 3.5rem 1.5rem 0;
+    }
+    .hero-scrim {
+      display: none;
+    }
+    /* order, because <picture> is the first child in the markup but the text should lead */
+    .hero-inner {
+      order: 1;
+    }
+    .hero-figure {
+      order: 2;
+      position: static;
+      display: block;
+      height: auto;
+      width: 62%;
+      max-width: 240px;
+      margin: 1.75rem 0 0 auto;
+    }
   }
   .hero h1 {
     font-size: clamp(2.2rem, 5vw, 3.4rem);

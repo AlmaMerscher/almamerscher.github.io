@@ -21,7 +21,6 @@ src/
     research.astro         intro prose + publication list
     engagements.astro      talks/panels/media: Forthcoming and Past
     contact.astro          contact details + Impressum (#impressum anchor)
-    datenschutz.astro      privacy policy
   styles/global.css        design tokens + base styles
 public/images/             hero photo, exported as WebP at two sizes plus a
                            head-and-shoulders crop for small screens
@@ -65,8 +64,13 @@ This site is operated from Germany. These constraints are legal, not stylistic.
    why it needs no cookie banner. Adding any of these reintroduces that requirement.
 4. **Analytics, if added, must be cookieless and EU-hosted** (GoatCounter, Plausible, or
    self-hosted Matomo). Never Google Analytics.
-5. **Impressum and Datenschutzerklärung must be reachable from every page** (§ 5 DDG).
-   Current law is DDG and TDDDG — not TMG or TTDSG. Older templates get this wrong.
+5. **The Impressum must be reachable from every page** (§ 5 DDG). It lives on
+   `contact.astro` under the `#impressum` anchor and the footer links to it. Current law
+   is DDG and TDDDG — not TMG or TTDSG. Older templates get this wrong.
+
+   Alma decided on 2026-09-22 not to publish a Datenschutzerklärung. She was told that
+   GitHub processes visitor IPs in the US and that this triggers the Art. 13 DSGVO duty
+   to inform. It is her decision — don't raise it again unless she asks.
 
 Before adding any dependency or embed, ask: does this cause the visitor's browser to
 contact a third-party server? If yes, it does not go in.
@@ -89,11 +93,8 @@ couple of dozen, move it to a content collection.
 
 **GitHub Pages**, chosen by Alma with the tradeoffs stated: US servers, visitor IPs
 logged, no AVV, and the repository must be public on a free plan. Don't re-litigate this.
-Two consequences that do still apply:
-
-- The Datenschutzerklärung must name GitHub as the host and disclose the US transfer.
-- Anything committed is permanently in public git history — including the Impressum
-  address.
+One consequence that does still apply: anything committed is permanently in public git
+history — including the Impressum address.
 
 Deploys run from `.github/workflows/deploy.yml` on every push to `main`. `astro.config.mjs`
 assumes the site is served from a domain root; serving from a subpath would require
@@ -102,5 +103,5 @@ setting `base` *and* updating every hardcoded internal link.
 ## Status
 
 All page content is still placeholder: the home headline and intro, research prose and
-publications, engagement entries, contact links, Impressum and Datenschutzerklärung.
-The legal text needs generating with a German provider and pasting in.
+publications, engagement entries, contact links, and the Impressum. The Impressum text
+needs generating with a German provider and pasting in.

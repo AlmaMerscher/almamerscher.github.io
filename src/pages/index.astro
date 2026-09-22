@@ -1,15 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-
-const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 4);
-
-const catColor: Record<string, string> = {
-  blog: "var(--cat-1)",
-  speaking: "var(--cat-4)",
-};
 ---
 
 <Layout title="Alma-Sophia Merscher">
@@ -35,26 +25,34 @@ const catColor: Record<string, string> = {
     <div class="wrap hero-inner">
       <p class="eyebrow">Welcome</p>
       <h1>A short, clear headline goes here</h1>
-      <p class="tagline">One or two sentences introducing you and what this site is about.</p>
-      <a href="/blog" class="button">Read the blog</a>
+      <p class="tagline">
+        One or two sentences introducing you and what this site is about.
+      </p>
+      <a href="/research" class="button">Read about my research</a>
     </div>
   </section>
 
-  <section class="wrap featured">
-    <h2 class="section-title">Latest</h2>
-    <div class="grid">
-      {
-        posts.map((post) => (
-          <a class="card" href={`/blog/${post.id}`}>
-            <p class="eyebrow" style={`color:${catColor[post.data.category]}`}>
-              {post.data.category}
-            </p>
-            <h3>{post.data.title}</h3>
-            <p class="desc">{post.data.description}</p>
-          </a>
-        ))
-      }
-      {posts.length === 0 && <p class="empty">No posts yet — add one in src/content/blog.</p>}
+  <section class="wrap intro">
+    <p class="lead">
+      A longer welcome paragraph goes here — a few sentences in your own voice about who
+      you are and what a visitor will find on this site. Replace this text.
+    </p>
+    <p>
+      A second paragraph, if you want one. This is the place to say what you work on and
+      why it matters, in plain language rather than academic phrasing.
+    </p>
+
+    <div class="signposts">
+      <a class="signpost" href="/research">
+        <p class="eyebrow">Research</p>
+        <h2>What I work on</h2>
+        <p class="desc">Current projects and publications.</p>
+      </a>
+      <a class="signpost" href="/engagements">
+        <p class="eyebrow">Engagements</p>
+        <h2>Talks, panels &amp; media</h2>
+        <p class="desc">Where to hear or read me next.</p>
+      </a>
     </div>
   </section>
 </Layout>
@@ -116,6 +114,49 @@ const catColor: Record<string, string> = {
   }
   .hero .tagline {
     max-width: 26rem;
+    color: var(--hero-text-muted);
+    margin: 0 0 1.6rem;
+    font-size: 1.05rem;
+  }
+
+  .intro {
+    padding: 3.5rem 1.5rem 1rem;
+    max-width: 720px;
+  }
+  .lead {
+    font-size: 1.15rem;
+  }
+  .intro p {
+    margin: 0 0 1.2rem;
+  }
+
+  .signposts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .signpost {
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .signpost:hover {
+    border-color: var(--accent-rust);
+  }
+  .signpost .eyebrow {
+    color: var(--accent-rust-deep);
+  }
+  .signpost h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.4rem;
+  }
+  .signpost .desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
   }
 
   /* Below 1000px there is no room for text and figure side by side. Overlapping them
@@ -145,50 +186,5 @@ const catColor: Record<string, string> = {
       max-width: 240px;
       margin: 1.75rem 0 0 auto;
     }
-  }
-  .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    color: var(--hero-text);
-    margin-bottom: 1rem;
-  }
-  .tagline {
-    color: var(--hero-text-muted);
-    margin: 0 0 1.6rem;
-    font-size: 1.05rem;
-  }
-  .featured {
-    padding: 3.5rem 1.5rem 4rem;
-  }
-  .section-title {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-  }
-  /* auto-fill, not auto-fit: keeps a single card from stretching the full width */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.5rem;
-  }
-  .card {
-    text-decoration: none;
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-  }
-  .card:hover {
-    border-color: var(--accent-rust);
-  }
-  .card h3 {
-    font-size: 1.1rem;
-    margin: 0.2rem 0 0.5rem;
-  }
-  .desc {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin: 0;
-  }
-  .empty {
-    color: var(--text-muted);
   }
 </style>

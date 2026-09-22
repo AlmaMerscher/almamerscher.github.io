@@ -1,0 +1,157 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Placeholder publications. Replace these with real entries; the list renders in order.
+const publications = [
+  {
+    year: "2026",
+    authors: "Merscher, A.-S., & Co-Author, B.",
+    title: "Placeholder title of a journal article",
+    venue: "Journal Name, 12(3), 145–162.",
+    doi: "",
+  },
+  {
+    year: "2025",
+    authors: "Co-Author, B., & Merscher, A.-S.",
+    title: "Another placeholder publication title",
+    venue: "Journal Name, 11(2), 88–104.",
+    doi: "",
+  },
+  {
+    year: "2024",
+    authors: "Merscher, A.-S.",
+    title: "A third placeholder entry",
+    venue: "Conference or edited volume.",
+    doi: "",
+  },
+];
+---
+
+<Layout
+  title="Research — Alma-Sophia Merscher"
+  description="Research on loneliness, connection and wellbeing."
+>
+  <section class="wrap page">
+    <p class="eyebrow">Research</p>
+    <h1>What I work on</h1>
+
+    <div class="prose">
+      <p class="lead">
+        A short opening paragraph describing your research focus in plain language —
+        the kind of thing you would say to someone outside your field. Replace this text.
+      </p>
+      <p>
+        A second paragraph with more detail: the questions you are pursuing, the methods
+        you use, and why the work matters. Add or remove paragraphs as you like.
+      </p>
+      <p>
+        A third paragraph, if useful — for example current projects, collaborations, or
+        where the work is heading next.
+      </p>
+    </div>
+
+    <h2 class="section-heading">Publications</h2>
+    <ol class="pubs">
+      {
+        publications.map((p) => (
+          <li>
+            <span class="year">{p.year}</span>
+            <div>
+              <p class="authors">{p.authors}</p>
+              <p class="pub-title">{p.title}</p>
+              <p class="venue">
+                {p.venue}
+                {p.doi && (
+                  <>
+                    {" "}
+                    <a href={`https://doi.org/${p.doi}`} rel="noopener">
+                      doi:{p.doi}
+                    </a>
+                  </>
+                )}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Layout>
+
+<style>
+  .page {
+    padding: 3rem 1.5rem 4rem;
+    max-width: 760px;
+  }
+  .eyebrow {
+    color: var(--accent-rust-deep);
+  }
+  h1 {
+    font-size: 2.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .prose {
+    line-height: 1.75;
+  }
+  .prose p {
+    margin: 0 0 1.2rem;
+  }
+  .lead {
+    font-size: 1.15rem;
+  }
+  .section-heading {
+    font-size: 1.4rem;
+    margin: 3rem 0 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .pubs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  .pubs li {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 0 1rem;
+    align-items: start;
+  }
+  .year {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--accent-rust-deep);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.2rem;
+  }
+  .pubs p {
+    margin: 0;
+  }
+  .authors {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .pub-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.15rem 0;
+  }
+  .venue {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .venue a {
+    color: var(--accent-rust-deep);
+  }
+
+  @media (max-width: 520px) {
+    .pubs li {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

@@ -17,20 +17,34 @@ npm run preview  # preview the production build
 src/
   layouts/Layout.astro     shared shell: nav, footer, <head>
   pages/                   one file per route
-    index.astro            home (hero + latest cards)
-    blog/index.astro       blog listing
-    blog/[...id].astro     individual post template
-    speaking.astro
-    contact.astro
-  content/blog/*.md        blog posts — add a file, it appears automatically
-  content.config.ts        frontmatter schema for posts
+    index.astro            Welcome — hero with photo, intro, signpost cards
+    research.astro         intro prose + publication list
+    engagements.astro      talks/panels/media: Forthcoming and Past
+    contact.astro          contact details + Impressum (#impressum anchor)
+    datenschutz.astro      privacy policy
   styles/global.css        design tokens + base styles
+public/images/             hero photo, exported as WebP at two sizes plus a
+                           head-and-shoulders crop for small screens
 ```
+
+Nav is four items: Welcome, Research, Engagements, Contact.
+
+**A blog is planned but deliberately not in this version.** The working implementation
+(`src/pages/blog/`, `src/content/`, `src/content.config.ts`) is in git history — recover
+it with `git show cf4671d:<path>` rather than rebuilding from scratch.
 
 ## Design
 
-Editorial style, inspired by Aeon and Nowness: warm palette, dark hero, bold serif
-headlines, warm-toned category labels.
+Editorial style, inspired by Aeon and Nowness: warm palette, bold serif headlines,
+warm-toned labels. The hero sits on a light oat ground one step deeper than the page
+background — a dark ground made the photo cutout's hair fringe visible and merged with
+Alma's hair.
+
+Check contrast when changing any colour; `--accent-rust` is only 3.83:1 on the oat hero,
+which is why `--accent-rust-deep` exists for small text.
+
+German compound nouns overflow narrow viewports, so German text carries `lang="de"` and
+hyphenates.
 
 **All colors and fonts are CSS custom properties in `src/styles/global.css`.** Change
 them there and the whole site follows. Never hardcode a hex value in a component.
@@ -59,19 +73,9 @@ contact a third-party server? If yes, it does not go in.
 
 ## Content
 
-Add a blog post by creating `src/content/blog/<slug>.md`:
-
-```yaml
----
-title: "Post title"
-description: "One-line summary, shown on cards and in search results"
-date: 2026-08-10
-category: blog     # or: speaking
----
-```
-
-Speaking entries are currently hardcoded in `speaking.astro`. If the list grows past a
-handful, move it to a content collection like the blog.
+Publications and engagements are plain arrays at the top of `research.astro` and
+`engagements.astro`. Edit those arrays to add entries. If either list grows past a
+couple of dozen, move it to a content collection.
 
 ## Conventions
 
@@ -81,8 +85,22 @@ handful, move it to a content collection like the blog.
 - Every page sets its own `<title>` via the `title` prop on `Layout`.
 - Write for a general reader, not an academic committee — this is a personal site.
 
+## Hosting
+
+**GitHub Pages**, chosen by Alma with the tradeoffs stated: US servers, visitor IPs
+logged, no AVV, and the repository must be public on a free plan. Don't re-litigate this.
+Two consequences that do still apply:
+
+- The Datenschutzerklärung must name GitHub as the host and disclose the US transfer.
+- Anything committed is permanently in public git history — including the Impressum
+  address.
+
+Deploys run from `.github/workflows/deploy.yml` on every push to `main`. `astro.config.mjs`
+assumes the site is served from a domain root; serving from a subpath would require
+setting `base` *and* updating every hardcoded internal link.
+
 ## Status
 
-Placeholder content is still in place on the home page, the sample blog post, speaking,
-and contact. Real content is pending. Hosting is not yet chosen; GitHub Pages was
-deliberately ruled out (US servers, visitor IP logging, no AVV).
+All page content is still placeholder: the home headline and intro, research prose and
+publications, engagement entries, contact links, Impressum and Datenschutzerklärung.
+The legal text needs generating with a German provider and pasting in.

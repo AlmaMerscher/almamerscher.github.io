@@ -1,0 +1,196 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Placeholder entries. `kind` is shown as the small label above each title.
+const forthcoming = [
+  {
+    date: "Month 2026",
+    kind: "Panel",
+    title: "Placeholder title of a panel discussion",
+    where: "Event or institution, City",
+  },
+  {
+    date: "Month 2026",
+    kind: "Keynote",
+    title: "Placeholder title of a keynote",
+    where: "Conference name, City",
+  },
+];
+
+const past = [
+  {
+    date: "Month 2026",
+    kind: "Interview",
+    title: "Placeholder title of a media interview",
+    where: "Outlet name",
+    image: "",
+  },
+  {
+    date: "Month 2025",
+    kind: "Panel",
+    title: "Placeholder title of a past panel",
+    where: "Event or institution, City",
+    image: "",
+  },
+  {
+    date: "Month 2025",
+    kind: "Talk",
+    title: "Placeholder title of a past talk",
+    where: "Conference name, City",
+    image: "",
+  },
+];
+---
+
+<Layout
+  title="Engagements — Alma-Sophia Merscher"
+  description="Talks, panel discussions and media appearances."
+>
+  <section class="wrap page">
+    <p class="eyebrow">Engagements</p>
+    <h1>Talks, panels &amp; media</h1>
+    <p class="lead">
+      A sentence or two about the kinds of events you take part in, and how to invite you.
+      Replace this text.
+    </p>
+
+    <h2 class="section-heading">Forthcoming</h2>
+    {
+      forthcoming.length === 0 ? (
+        <p class="empty">Nothing scheduled at the moment.</p>
+      ) : (
+        <ul class="list">
+          {forthcoming.map((e) => (
+            <li>
+              <span class="date">{e.date}</span>
+              <div>
+                <p class="kind">{e.kind}</p>
+                <h3>{e.title}</h3>
+                <p class="where">{e.where}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <h2 class="section-heading">Past</h2>
+    <ul class="list past">
+      {
+        past.map((e) => (
+          <li>
+            <span class="date">{e.date}</span>
+            <div>
+              <p class="kind">{e.kind}</p>
+              <h3>{e.title}</h3>
+              <p class="where">{e.where}</p>
+              {e.image ? (
+                <img class="shot" src={e.image} alt="" loading="lazy" />
+              ) : (
+                <div class="shot placeholder" aria-hidden="true">
+                  <span>Photo</span>
+                </div>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .page {
+    padding: 3rem 1.5rem 4rem;
+    max-width: 760px;
+  }
+  .eyebrow {
+    color: var(--accent-rust-deep);
+  }
+  h1 {
+    font-size: 2.1rem;
+    margin-bottom: 0.8rem;
+  }
+  .lead {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 52ch;
+    margin: 0;
+  }
+  .section-heading {
+    font-size: 1.4rem;
+    margin: 3rem 0 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .list li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    align-items: start;
+  }
+  .date {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-rust-deep);
+    padding-top: 0.25rem;
+  }
+  .list p {
+    margin: 0;
+  }
+  .kind {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .list h3 {
+    font-size: 1.1rem;
+    margin: 0.2rem 0 0.25rem;
+  }
+  .where {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .empty {
+    color: var(--text-muted);
+  }
+
+  .shot {
+    margin-top: 0.9rem;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+  }
+  .shot.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    background: var(--hero-bg-1);
+    border: 1px dashed var(--border);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 520px) {
+    .list li {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+</style>

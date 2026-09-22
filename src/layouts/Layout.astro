@@ -23,9 +23,9 @@ const { title, description = "Alma-Sophia Merscher" } = Astro.props;
       <div class="wrap nav-inner">
         <a href="/" class="brand">Alma-Sophia Merscher</a>
         <nav class="links">
-          <a href="/">Home</a>
-          <a href="/blog">Blog</a>
-          <a href="/speaking">Speaking</a>
+          <a href="/">Welcome</a>
+          <a href="/research">Research</a>
+          <a href="/engagements">Engagements</a>
           <a href="/contact">Contact</a>
         </nav>
       </div>
@@ -38,10 +38,12 @@ const { title, description = "Alma-Sophia Merscher" } = Astro.props;
     <footer class="site-foot">
       <div class="wrap foot-inner">
         <span>&copy; {new Date().getFullYear()} Alma-Sophia Merscher</span>
+        <!-- Impressum and Datenschutz must be reachable from every page (§ 5 DDG). -->
         <div class="foot-links">
+          <a href="/contact#impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
           <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
-          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
     </footer>
@@ -65,7 +67,8 @@ const { title, description = "Alma-Sophia Merscher" } = Astro.props;
       }
       .links {
         display: flex;
-        gap: 1.4rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.4rem;
       }
       .links a {
         text-decoration: none;
@@ -90,7 +93,8 @@ const { title, description = "Alma-Sophia Merscher" } = Astro.props;
       }
       .foot-links {
         display: flex;
-        gap: 1.2rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.2rem;
       }
       .foot-links a {
         text-decoration: none;

@@ -47,6 +47,15 @@ h1, h2, h3, h4 {
   line-height: 1.15;
   text-wrap: balance;
   margin: 0;
+  /* German compound nouns (Datenschutzerklärung, Auftragsverarbeitung) are long enough
+     to overflow a phone viewport on their own. */
+  overflow-wrap: break-word;
+}
+
+/* German legal text: hyphenate rather than overflow. Needs lang="de" on the element. */
+[lang="de"] {
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 a {

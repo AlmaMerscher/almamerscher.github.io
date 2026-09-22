@@ -2,7 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Alma-Sophia Merscher">
+<Layout
+  title="Alma-Sophia Merscher"
+  description="Psychologist at LMU Munich researching loneliness, social cohesion, and how they relate to political attitudes and behaviour."
+>
   <section class="hero">
     <picture>
       <source
@@ -24,22 +27,27 @@ import Layout from "../layouts/Layout.astro";
     <div class="hero-scrim"></div>
     <div class="wrap hero-inner">
       <p class="eyebrow">Welcome</p>
-      <h1>A short, clear headline goes here</h1>
+      <h1>Alma-Sophia Merscher</h1>
       <p class="tagline">
-        One or two sentences introducing you and what this site is about.
+        Psychologist at LMU Munich, researching loneliness and social cohesion.
       </p>
       <a href="/research" class="button">Read about my research</a>
     </div>
   </section>
 
   <section class="wrap intro">
-    <p class="lead">
-      A longer welcome paragraph goes here — a few sentences in your own voice about who
-      you are and what a visitor will find on this site. Replace this text.
+    <p class="lead">Welcome, and thank you for stopping by.</p>
+    <p>
+      I'm a psychologist at LMU Munich. Most of my work is about loneliness and social
+      cohesion — what pulls people apart, what holds them together, and how that shapes
+      the way we think and act politically. A second strand looks at how stigma and
+      loneliness feed into one another.
     </p>
     <p>
-      A second paragraph, if you want one. This is the place to say what you work on and
-      why it matters, in plain language rather than academic phrasing.
+      I also run an interest group for early-career researchers working on loneliness, and
+      I care a great deal about getting research out of the journals and into the world.
+      If any of this speaks to you, or you'd like to join the group, I'd genuinely like to
+      hear from you.
     </p>
 
     <div class="signposts">
@@ -110,7 +118,9 @@ import Layout from "../layouts/Layout.astro";
   }
   /* rem, not ch: ch resolves against the h1's own ~54px font-size and blows past the figure */
   .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
     max-width: 26rem;
+    margin-bottom: 0.9rem;
   }
   .hero .tagline {
     max-width: 26rem;

@@ -1,28 +1,76 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-// Placeholder publications. Replace these with real entries; the list renders in order.
+// Publications, newest first. Every DOI below was resolved against Crossref/DataCite
+// and matched its title. Add new entries at the top.
+const ME = "Merscher, A.-S.";
+
 const publications = [
   {
     year: "2026",
-    authors: "Merscher, A.-S., & Co-Author, B.",
-    title: "Placeholder title of a journal article",
-    venue: "Journal Name, 12(3), 145–162.",
-    doi: "",
+    authors: "Merscher, A.-S., Hildebrandt, L. K., Sahraoui, J., & Gamer, M.",
+    title:
+      "Unraveling the behavioral and autonomic dynamics of defensive states in humans in an unconstrained, immersive virtual world",
+    venue: "Computers in Human Behavior, 109057.",
+    doi: "10.1016/j.chb.2026.109057",
   },
   {
-    year: "2025",
-    authors: "Co-Author, B., & Merscher, A.-S.",
-    title: "Another placeholder publication title",
-    venue: "Journal Name, 11(2), 88–104.",
-    doi: "",
+    year: "2026",
+    authors: "Merscher, A.-S., Reinhard, M. A., Wolf, J., & Weiß, M.",
+    title: "A temporal perspective on loneliness and trustworthiness judgments in everyday life",
+    venue: "F1000Research, 15, 667.",
+    note: "Version 1; peer review: 1 approved with reservations",
+    doi: "10.12688/f1000research.179039.1",
+  },
+  {
+    year: "2026",
+    authors:
+      "Merscher, A.-S., Akhter-Khan, S. C., Brakemeier, E.-L., Buecker, S., Goodwin, B., Krieger, T., Langenkamp, A., Langkamp, C., Neu, C., Reinhard, M., Schobin, J., Seewer, N., Swader, C., & Wolf, J.",
+    title: "Einsamkeit als demokratiepolitische Frage",
+    lang: "de",
+    venue:
+      "In A. Beelmann, E.-L. Brakemeier, U. Wagner & W. G. Weber (Hrsg.), Policy Ultra-Briefs aus der Psychologie und angrenzenden Verhaltenswissenschaften, Reihe 2 – Psychologie und Demokratieförderung. Leibniz-Institut für Psychologie (ZPID).",
+    doi: "10.23668/psycharchives.22420",
+  },
+  {
+    year: "2026",
+    authors:
+      "Göhre, I., Vogel, L., Brückl, T., Hupe, K., Wollinger, J., Wolkenstein, L., Aleksic, M., Merscher, A.-S., Semm, A., Claus, N., Goerigk, S., Kopf-Beck, J., Binder, E., Padberg, F., Reinhard, M. A., Ehring, T., & Bertsch, K.",
+    title:
+      "Old scars don’t hurt? A systematic review on the association between child maltreatment and adult social functioning",
+    venue: "Trauma, Violence, & Abuse. Advance online publication.",
+    doi: "10.1177/15248380261439146",
   },
   {
     year: "2024",
-    authors: "Merscher, A.-S.",
-    title: "A third placeholder entry",
-    venue: "Conference or edited volume.",
-    doi: "",
+    authors: "Merscher, A.-S., & Gamer, M.",
+    title:
+      "Can I see it in the eyes? An investigation of freezing-like motion patterns in response to avoidable threat",
+    venue: "Psychophysiology, 61, e14567.",
+    doi: "10.1111/psyp.14567",
+  },
+  {
+    year: "2024",
+    authors: "Merscher, A.-S., & Gamer, M.",
+    title:
+      "Fear lies in the eyes of the beholder—Robust evidence for reduced gaze dispersion upon avoidable threat",
+    venue: "Psychophysiology, 61(1), e14421.",
+    doi: "10.1111/psyp.14421",
+  },
+  {
+    year: "2022",
+    authors: "Merscher, A.-S., Tovote, P., Pauli, P., & Gamer, M.",
+    title: "Centralized gaze as an adaptive component of defensive states in humans",
+    venue: "Proceedings of the Royal Society B: Biological Sciences, 289(1975), 20220405.",
+    doi: "10.1098/rspb.2022.0405",
+  },
+  {
+    year: "2020",
+    authors: "Merscher, A.-S., & Gamer, M.",
+    title:
+      "Freezing of gaze in anticipation of avoidable threat: A threat-specific proxy for freezing-like behavior in humans",
+    venue: "ACM Symposium on Eye Tracking Research and Applications (ETRA ’20 Short Papers), Article 33.",
+    doi: "10.1145/3379156.3391345",
   },
 ];
 ---
@@ -57,18 +105,26 @@ const publications = [
           <li>
             <span class="year">{p.year}</span>
             <div>
-              <p class="authors">{p.authors}</p>
-              <p class="pub-title">{p.title}</p>
-              <p class="venue">
-                {p.venue}
-                {p.doi && (
-                  <>
-                    {" "}
-                    <a href={`https://doi.org/${p.doi}`} rel="noopener">
-                      doi:{p.doi}
-                    </a>
-                  </>
+              <p class="authors">
+                {/* own name in bold so readers can find it in long author lists */}
+                {p.authors.split(ME).map((part, i) =>
+                  i === 0 ? (
+                    part
+                  ) : (
+                    <>
+                      <strong>{ME}</strong>
+                      {part}
+                    </>
+                  )
                 )}
+              </p>
+              <p class="pub-title" lang={p.lang ?? undefined}>{p.title}</p>
+              <p class="venue" lang={p.lang ?? undefined}>{p.venue}</p>
+              <p class="meta">
+                {p.note && <span class="note">{p.note}</span>}
+                <a href={`https://doi.org/${p.doi}`} rel="noopener">
+                  doi.org/{p.doi}
+                </a>
               </p>
             </div>
           </li>
@@ -144,8 +200,33 @@ const publications = [
     font-size: 0.88rem;
     color: var(--text-muted);
   }
-  .venue a {
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.7rem;
+    margin-top: 0.35rem !important;
+    font-size: 0.82rem;
+  }
+  .meta a {
     color: var(--accent-rust-deep);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .meta a:hover {
+    text-decoration: underline;
+  }
+  .note {
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+  }
+  .authors strong {
+    font-weight: 700;
+    color: var(--text);
   }
 
   @media (max-width: 520px) {

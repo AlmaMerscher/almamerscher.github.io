@@ -22,8 +22,19 @@
   --cat-3: #8c5a2e;
   --cat-4: #96311f;
 
+  /* Midnight hero, after the reference design: deep navy ground, white display type. */
+  --night-bg: #18212e;
+  --night-bg-rgb: 24, 33, 46;
+  --night-text: #f3f6f9;
+  --night-muted: #93a6ba;
+  --night-rule: rgba(243, 246, 249, 0.22);
+
   --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
   --font-sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  /* Display face for the hero. System stack for now — a self-hosted grotesk would match
+     the reference more closely; it must live in public/fonts, never a CDN. */
+  --font-display: "Segoe UI Variable Display", "Segoe UI Semibold", "Segoe UI",
+    -apple-system, "Helvetica Neue", Arial, sans-serif;
 
   --content-width: 900px;
 }
@@ -62,6 +73,21 @@ h1, h2, h3, h4 {
 
 a {
   color: inherit;
+}
+
+/* Inline links inside running text. Nav, cards and list rows style their own links;
+   without this, body-copy links inherit the text colour and are invisible. */
+.prose a,
+.intro a {
+  color: var(--accent-rust-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.prose a:hover,
+.intro a:hover {
+  text-decoration-thickness: 2px;
 }
 
 img {

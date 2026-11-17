@@ -19,14 +19,15 @@ src/
   pages/                   one file per route
     index.astro            Welcome — hero with photo, intro, signpost cards
     research.astro         intro prose + publication list
-    engagements.astro      talks/panels/media: Forthcoming and Past
+    engagements.astro      talks/panels/media, grouped by type
+    interest-group.astro   the international loneliness interest group
     contact.astro          contact details + Impressum (#impressum anchor)
   styles/global.css        design tokens + base styles
 public/images/             hero photo, exported as WebP at two sizes plus a
                            head-and-shoulders crop for small screens
 ```
 
-Nav is four items: Welcome, Research, Engagements, Contact.
+Nav is five items: Welcome, Research, Engagements, Interest Group, Contact.
 
 **A blog is planned but deliberately not in this version.** The working implementation
 (`src/pages/blog/`, `src/content/`, `src/content.config.ts`) is in git history — recover
@@ -34,13 +35,24 @@ it with `git show cf4671d:<path>` rather than rebuilding from scratch.
 
 ## Design
 
-Editorial style, inspired by Aeon and Nowness: warm palette, bold serif headlines,
-warm-toned labels. The hero sits on a light oat ground one step deeper than the page
-background — a dark ground made the photo cutout's hair fringe visible and merged with
-Alma's hair.
+Two registers. The **home hero** is a midnight-navy band after a reference design Alma
+supplied: deep navy (`--night-*` tokens), bold display sans, name set in two weights, a
+hairline rule, photo bleeding off the bottom-left. The **rest of the site** is warm and
+editorial — cream ground, serif headlines, rust and amber labels.
 
-Check contrast when changing any colour; `--accent-rust` is only 3.83:1 on the oat hero,
-which is why `--accent-rust-deep` exists for small text.
+The hero photo is **pre-composited onto `--night-bg`** (`alma-portrait-navy-*.webp`).
+The cutout's anti-aliased edge is ~15x brighter than the navy, so letting the browser
+composite the transparent version over a dark ground leaves a visible halo around the
+hair. If `--night-bg` changes, regenerate those files or the fringe returns.
+
+The hero has an explicit `height`, not `min-height`, and the photo is absolutely
+positioned. With the photo in flow, `height: 100%` on a content-sized grid row is
+circular and the hero grew to 1415px.
+
+Check contrast when changing any colour. Several values here are chosen to clear 4.5:1
+at small sizes and are not free to nudge: `--accent-rust-deep` exists because
+`--accent-rust` is 3.83:1 on the oat tone, and `--cat-2` was darkened from `#a3781f`
+(3.92:1) for the same reason.
 
 German compound nouns overflow narrow viewports, so German text carries `lang="de"` and
 hyphenates.
@@ -81,6 +93,14 @@ Publications and engagements are plain arrays at the top of `research.astro` and
 `engagements.astro`. Edit those arrays to add entries. If either list grows past a
 couple of dozen, move it to a content collection.
 
+**Propose any user-facing copy to Alma in chat and wait for her yes before putting it in
+a page.** Headlines, intros, taglines, button labels, page descriptions. Rewriting text
+she supplied is fine when she asks, but flag any phrase added that was not in her
+original. Structural and CSS work does not need this.
+
+When adding an outbound link, strip tracking parameters (`utm_*`, LinkedIn's `rcm=`) and
+expand shorteners such as `lnkd.in` to their real destination first.
+
 ## Conventions
 
 - Keep the dependency list near-empty. Astro alone covers what this site needs.
@@ -102,6 +122,13 @@ setting `base` *and* updating every hardcoded internal link.
 
 ## Status
 
-All page content is still placeholder: the home headline and intro, research prose and
-publications, engagement entries, contact links, and the Impressum. The Impressum text
-needs generating with a German provider and pasting in.
+Done: Welcome (hero, photo, intro text), Research (opening paragraph and eight
+publications), Engagements (ten entries grouped by type).
+
+Still placeholder: the Engagements intro paragraph, the Interest Group's "How it works"
+and "Joining" sections, the Contact links, and the Impressum — which needs generating
+with a German provider and pasting in.
+
+The site is not live. The repository is private and the deploy workflow is disabled;
+publishing means making the repo public and re-enabling the workflow, and Alma asks for
+both deliberately.

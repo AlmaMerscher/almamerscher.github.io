@@ -7,44 +7,48 @@ import Layout from "../layouts/Layout.astro";
   description="Psychologist at LMU Munich researching loneliness, social cohesion, and how they relate to political attitudes and behaviour."
 >
   <section class="hero">
-    <picture>
-      <source
-        media="(min-width: 1001px)"
-        srcset="/images/alma-hero-420.webp 420w, /images/alma-hero-840.webp 840w"
-        sizes="420px"
-      />
-      <img
-        class="hero-figure"
-        src="/images/alma-portrait-320.webp"
-        srcset="/images/alma-portrait-320.webp 320w, /images/alma-portrait-640.webp 640w"
-        sizes="240px"
-        width="320"
-        height="401"
-        alt="Alma-Sophia Merscher"
-        fetchpriority="high"
-      />
-    </picture>
-    <div class="hero-scrim"></div>
-    <div class="wrap hero-inner">
-      <p class="eyebrow">Welcome</p>
-      <h1>Alma-Sophia Merscher</h1>
-      <a href="/research" class="button">Read about my research</a>
+    {/* pre-composited onto --night-bg: the cutout's anti-aliased edge is ~15x brighter
+        than the navy, so compositing in the browser leaves a visible halo */}
+    <img
+      class="hero-figure"
+      src="/images/alma-portrait-navy-640.webp"
+      srcset="/images/alma-portrait-navy-320.webp 320w, /images/alma-portrait-navy-640.webp 640w"
+      sizes="(max-width: 1000px) 260px, 460px"
+      width="640"
+      height="802"
+      alt="Alma-Sophia Merscher"
+      fetchpriority="high"
+    />
+
+    <div class="hero-inner">
+      <p class="eyebrow">Loneliness &amp; social cohesion</p>
+      {/* two weights of one name, rather than adding a role line */}
+      <h1>
+        <span class="n1">Alma-Sophia</span>
+        <span class="n2">Merscher</span>
+      </h1>
+      <a href="/research" class="hero-link">Research</a>
     </div>
+
+    <a class="scroll-cue" href="#intro" aria-label="Skip to introduction">
+      <span aria-hidden="true">↓</span>
+    </a>
   </section>
 
-  <section class="wrap intro">
+  <section class="wrap intro" id="intro">
     <p class="lead">Welcome, and thank you for stopping by.</p>
     <p>
-      I'm a psychologist at LMU Munich. Most of my work is about loneliness and social
-      cohesion — what pulls people apart, what holds them together, and how that shapes
-      the way we think and act politically. A second strand looks at how stigma and
-      loneliness feed into one another.
+      I'm a psychologist, affiliated with the International Stone Center for Inequality
+      Research at LMU Munich. Most of my work is about loneliness and social cohesion. I am
+      interested in what pulls people apart, what holds them together, and how this shapes
+      the way we think and act politically. In a second strand, I look at how stigma and
+      loneliness feed into one another and how we could counter that stigma.
     </p>
     <p>
-      I also run an interest group for early-career researchers working on loneliness, and
-      I care about getting research out of the journals and into the world.
-      If any of this speaks to you, or you'd like to join the group, I'd genuinely like to
-      hear from you.
+      I also run an <a href="/interest-group">international interest group</a> for
+      researchers working on loneliness, and I care about getting research out of the
+      journals and <a href="/engagements">into the world</a>. If any of this speaks to you,
+      or you'd like to join the group, I'd genuinely like to hear from you.
     </p>
 
     <div class="signposts">
@@ -63,67 +67,108 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
-  /* Photo sits to the right, cropped by the band; scrim keeps the headline readable. */
+  /* Midnight hero: photo bleeds off the left, display type sits right of a hairline rule. */
   .hero {
     position: relative;
     overflow: hidden;
     isolation: isolate;
-    /* Flat, and the scrim fades from this exact colour. A gradient here shows through
-       where the scrim fades out and reads as a seam down the middle of the band. */
-    background: var(--hero-bg-1);
-    color: var(--hero-text);
-    padding: 5rem 1.5rem;
-    min-height: 480px;
-    display: flex;
-    align-items: center;
-  }
-  /* display:contents so the <img> itself is the flex item — otherwise the <picture>
-     wrapper swallows `order` and the photo can't be moved below the text on mobile. */
-  .hero picture {
-    display: contents;
+    background: var(--night-bg);
+    color: var(--night-text);
+    /* explicit height, not min-height: the photo is absolutely positioned so it cannot
+       drive the row, and the crop is meant to bleed off the bottom edge */
+    height: clamp(440px, 62vh, 580px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: stretch;
   }
   .hero-figure {
     position: absolute;
-    top: 0;
-    right: max(1.5rem, calc(50% - 450px));
-    height: 1040px;
+    left: 0;
+    bottom: 0;
+    height: 100%;
     width: auto;
-    z-index: 0;
+    max-width: 52%;
+    object-fit: contain;
+    object-position: bottom left;
     pointer-events: none;
     user-select: none;
   }
-  .hero-scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      100deg,
-      var(--hero-bg-1) 0%,
-      rgba(var(--hero-bg-1-rgb), 0.94) 34%,
-      rgba(var(--hero-bg-1-rgb), 0.6) 52%,
-      rgba(var(--hero-bg-1-rgb), 0) 70%
-    );
+
+  .hero-inner {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    padding: 3rem clamp(1.5rem, 5vw, 4rem) 3rem clamp(1.5rem, 4vw, 3rem);
+    border-left: 1px solid var(--night-rule);
   }
   .hero .eyebrow {
-    color: var(--accent-rust-deep);
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--night-muted);
+    margin: 0 0 1.1rem;
   }
-  /* width:100% so the flex item keeps .wrap's 900px column instead of shrinking to content */
-  .hero-inner {
-    width: 100%;
-    position: relative;
-    z-index: 2;
-  }
-  /* rem, not ch: ch resolves against the h1's own ~54px font-size and blows past the figure */
+  /* two weights of one name, rather than inventing a role line */
   .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    max-width: 26rem;
-    margin-bottom: 1.6rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 5.6vw, 4.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.9rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--night-text);
   }
-  .hero .tagline {
-    max-width: 26rem;
-    color: var(--hero-text-muted);
-    margin: 0 0 1.6rem;
-    font-size: 1.05rem;
+  .hero h1 .n1 {
+    font-weight: 800;
+  }
+  .hero h1 .n2 {
+    font-weight: 300;
+  }
+
+  .hero-link {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--night-text);
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--night-rule);
+    transition: border-color 140ms ease;
+  }
+  .hero-link:hover,
+  .hero-link:focus-visible {
+    border-bottom-color: var(--night-text);
+  }
+
+  .scroll-cue {
+    position: absolute;
+    right: clamp(1.25rem, 4vw, 3rem);
+    bottom: clamp(1rem, 3vh, 2rem);
+    z-index: 3;
+    color: var(--night-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: transform 160ms ease, color 160ms ease;
+  }
+  .scroll-cue:hover,
+  .scroll-cue:focus-visible {
+    color: var(--night-text);
+    transform: translateY(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue,
+    .hero-link {
+      transition: none;
+    }
+    .scroll-cue:hover {
+      transform: none;
+    }
   }
 
   .intro {
@@ -166,32 +211,37 @@ import Layout from "../layouts/Layout.astro";
     margin: 0;
   }
 
-  /* Below 1000px there is no room for text and figure side by side. Overlapping them
-     pushes the head off the top of the band, so stack instead: text, then a
-     head-and-shoulders crop at the lower right. No scrim needed. */
+  /* Below 1000px there is no room for two columns, so stack: text first, then the
+     head-and-shoulders crop. The vertical rule becomes a horizontal one. */
   @media (max-width: 1000px) {
     .hero {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      min-height: 0;
-      padding: 3.5rem 1.5rem 0;
+      height: auto;
+      padding: 3rem 1.5rem 0;
     }
-    .hero-scrim {
-      display: none;
+    .hero-figure {
+      position: static;
+      max-width: 260px;
     }
     /* order, because <picture> is the first child in the markup but the text should lead */
     .hero-inner {
       order: 1;
+      padding: 0 0 1.75rem;
+      border-left: none;
+      border-bottom: 1px solid var(--night-rule);
     }
     .hero-figure {
       order: 2;
-      position: static;
-      display: block;
       height: auto;
-      width: 62%;
-      max-width: 240px;
-      margin: 1.75rem 0 0 auto;
+      width: 64%;
+      max-width: 260px;
+      align-self: flex-end;
+      margin-top: 1.5rem;
+    }
+    .scroll-cue {
+      display: none;
     }
   }
 </style>

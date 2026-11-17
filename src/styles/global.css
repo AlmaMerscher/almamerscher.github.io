@@ -15,8 +15,10 @@
   --hero-text: #1c1712;
   --hero-text-muted: #6b5c46;
 
+  /* Category label colours. These are used at small sizes, so each must clear 4.5:1
+     on --bg. #a3781f was only 3.92:1, hence the darker amber. */
   --cat-1: #b5502e;
-  --cat-2: #a3781f;
+  --cat-2: #916817;
   --cat-3: #8c5a2e;
   --cat-4: #96311f;
 

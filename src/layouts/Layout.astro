@@ -7,6 +7,50 @@ interface Props {
 }
 
 const { title, description = "Alma-Sophia Merscher" } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://almamerscher.github.io");
+
+// Structured data. `knowsAbout` is the standards-compliant way to declare research
+// topics to search engines — including the German terms — without hidden text.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Alma-Sophia Merscher",
+  givenName: "Alma-Sophia",
+  familyName: "Merscher",
+  jobTitle: "Social Psychology Researcher",
+  description:
+    "Social psychology researcher working on loneliness, social cohesion, and their relationship to political attitudes and behaviour.",
+  url: "https://almamerscher.github.io/",
+  affiliation: {
+    "@type": "Organization",
+    name: "International Stone Center for Inequality Research, LMU Munich",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Ohmstraße 8",
+      postalCode: "80802",
+      addressLocality: "München",
+      addressCountry: "DE",
+    },
+  },
+  knowsAbout: [
+    "Loneliness",
+    "Einsamkeit",
+    "Loneliness stigma",
+    "Einsamkeitsstigma",
+    "Social cohesion",
+    "Sozialer Zusammenhalt",
+    "Social isolation",
+    "Soziale Isolation",
+    "Political attitudes",
+    "Social psychology",
+  ],
+  knowsLanguage: ["de", "en"],
+  sameAs: [
+    "https://www.linkedin.com/in/alma-merscher",
+    "https://www.linkedin.com/company/tackling-loneliness/",
+  ],
+};
 ---
 
 <html lang="en">
@@ -14,9 +58,20 @@ const { title, description = "Alma-Sophia Merscher" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   </head>
   <body>
     <header class="site-nav">
@@ -42,8 +97,13 @@ const { title, description = "Alma-Sophia Merscher" } = Astro.props;
         <!-- Impressum must be reachable from every page (§ 5 DDG). -->
         <div class="foot-links">
           <a href="/contact#impressum">Impressum</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="mailto:a.merscher@lmu.de">a.merscher@lmu.de</a>
+          <a href="https://www.linkedin.com/in/alma-merscher" target="_blank" rel="noopener">
+            LinkedIn
+          </a>
+          <a href="https://www.linkedin.com/company/tackling-loneliness/" target="_blank" rel="noopener">
+            Tackling Loneliness
+          </a>
         </div>
       </div>
     </footer>

@@ -21,13 +21,11 @@ import Layout from "../layouts/Layout.astro";
     />
 
     <div class="hero-inner">
-      <p class="eyebrow">Loneliness &amp; social cohesion</p>
-      {/* two weights of one name, rather than adding a role line */}
       <h1>
         <span class="n1">Alma-Sophia</span>
         <span class="n2">Merscher</span>
       </h1>
-      <a href="/research" class="hero-link">Research</a>
+      <p class="role">Social Psychology Researcher &amp; Speaker</p>
     </div>
 
     <a class="scroll-cue" href="#intro" aria-label="Skip to introduction">
@@ -47,9 +45,26 @@ import Layout from "../layouts/Layout.astro";
     <p>
       I also run an <a href="/interest-group">international interest group</a> for
       researchers working on loneliness, and I care about getting research out of the
-      journals and <a href="/engagements">into the world</a>. If any of this speaks to you,
-      or you'd like to join the group, I'd genuinely like to hear from you.
+      journals and <a href="/engagements">into the world</a>. On{" "}
+      <a href="https://www.linkedin.com/company/tackling-loneliness/" target="_blank" rel="noopener">
+        Tackling Loneliness
+      </a>, my LinkedIn page, I synthesise current research and open questions on
+      loneliness and related topics. If any of this speaks to you, or you'd like to join
+      the group, I'd love to <a href="mailto:a.merscher@lmu.de">hear</a> from you.
     </p>
+
+    <div class="connect">
+      <a class="connect-card" href="https://www.linkedin.com/company/tackling-loneliness/" target="_blank" rel="noopener">
+        <p class="eyebrow">LinkedIn page</p>
+        <h2>Tackling Loneliness</h2>
+        <p class="desc">Research and open questions on loneliness, in short form.</p>
+      </a>
+      <a class="connect-card" href="https://www.linkedin.com/in/alma-merscher" target="_blank" rel="noopener">
+        <p class="eyebrow">LinkedIn profile</p>
+        <h2>Alma-Sophia Merscher</h2>
+        <p class="desc">Connect with me directly.</p>
+      </a>
+    </div>
 
     <div class="signposts">
       <a class="signpost" href="/research">
@@ -101,20 +116,12 @@ import Layout from "../layouts/Layout.astro";
     padding: 3rem clamp(1.5rem, 5vw, 4rem) 3rem clamp(1.5rem, 4vw, 3rem);
     border-left: 1px solid var(--night-rule);
   }
-  .hero .eyebrow {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    color: var(--night-muted);
-    margin: 0 0 1.1rem;
-  }
-  /* two weights of one name, rather than inventing a role line */
   .hero h1 {
     font-family: var(--font-display);
     font-size: clamp(2.3rem, 5.6vw, 4.4rem);
     line-height: 0.98;
     letter-spacing: -0.02em;
-    margin: 0 0 1.9rem;
+    margin: 0 0 1.1rem;
     display: flex;
     flex-direction: column;
     color: var(--night-text);
@@ -125,23 +132,14 @@ import Layout from "../layouts/Layout.astro";
   .hero h1 .n2 {
     font-weight: 300;
   }
-
-  .hero-link {
-    display: inline-block;
+  .role {
     font-family: var(--font-display);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
+    font-size: clamp(0.78rem, 1.15vw, 0.95rem);
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    text-decoration: none;
-    color: var(--night-text);
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid var(--night-rule);
-    transition: border-color 140ms ease;
-  }
-  .hero-link:hover,
-  .hero-link:focus-visible {
-    border-bottom-color: var(--night-text);
+    color: var(--night-muted);
+    margin: 0;
   }
 
   .scroll-cue {
@@ -180,6 +178,37 @@ import Layout from "../layouts/Layout.astro";
   }
   .intro p {
     margin: 0 0 1.2rem;
+  }
+
+  .connect {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .connect-card {
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-rust);
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+  }
+  .connect-card:hover {
+    border-color: var(--accent-rust);
+  }
+  .connect-card .eyebrow {
+    color: var(--accent-rust-deep);
+    margin-bottom: 0.35rem;
+  }
+  .connect-card h2 {
+    font-size: 1.05rem;
+    margin: 0 0 0.3rem;
+  }
+  .connect-card .desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin: 0;
   }
 
   .signposts {

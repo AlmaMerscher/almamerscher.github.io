@@ -10,57 +10,58 @@ import Layout from "../layouts/Layout.astro";
     <p class="eyebrow">Contact</p>
     <h1>Get in touch</h1>
     <p class="lead">
-      A line about what people are welcome to write to you about — collaborations, media
-      enquiries, speaking invitations. Replace this text.
+      For collaborations, media or speaking enquiries, or just simply exchange, please
+      contact me.
     </p>
 
     <ul class="list">
-      <li><span class="k">Email</span><a href="mailto:you@example.com">you@example.com</a></li>
+      <li>
+        <span class="k">Email</span>
+        <a href="mailto:a.merscher@lmu.de">a.merscher@lmu.de</a>
+      </li>
       <li>
         <span class="k">LinkedIn</span>
-        <a href="https://linkedin.com" rel="noopener">linkedin.com/in/yourname</a>
+        <a href="https://www.linkedin.com/in/alma-merscher" target="_blank" rel="noopener">
+          linkedin.com/in/alma-merscher
+        </a>
       </li>
       <li>
-        <span class="k">Google Scholar</span>
-        <a href="https://scholar.google.com" rel="noopener">scholar.google.com/yourprofile</a>
-      </li>
-      <li>
-        <span class="k">ORCID</span>
-        <a href="https://orcid.org" rel="noopener">orcid.org/0000-0000-0000-0000</a>
+        <span class="k">Tackling Loneliness</span>
+        <a
+          href="https://www.linkedin.com/company/tackling-loneliness/"
+          target="_blank"
+          rel="noopener"
+        >
+          linkedin.com/company/tackling-loneliness
+        </a>
       </li>
     </ul>
 
     <!-- Impressum is a legal requirement under § 5 DDG and must stay reachable
          from every page. The footer links straight to this anchor. -->
     <h2 id="impressum" class="section-heading">Impressum</h2>
-    <p class="note">
-      Angaben gemäß § 5 DDG. Replace every placeholder below with your real details — a
-      postal address is required and a P.O. box is not sufficient.
-    </p>
 
     <div class="legal" lang="de">
       <p><strong>Angaben gemäß § 5 DDG</strong></p>
       <p>
         Alma-Sophia Merscher<br />
-        [Straße und Hausnummer]<br />
-        [PLZ und Ort]<br />
+        International Stone Center for Inequality Research<br />
+        Ohmstraße 8<br />
+        80802 München<br />
         Deutschland
       </p>
 
       <p><strong>Kontakt</strong></p>
-      <p>
-        E-Mail: [E-Mail-Adresse]<br />
-        Telefon: [optional]
-      </p>
+      <p>E-Mail: <a href="mailto:a.merscher@lmu.de">a.merscher@lmu.de</a></p>
 
       <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</strong></p>
       <p>
         Alma-Sophia Merscher<br />
-        [Anschrift wie oben]
+        International Stone Center for Inequality Research<br />
+        Ohmstraße 8<br />
+        80802 München<br />
+        Deutschland
       </p>
-
-      <p><strong>Haftung für Inhalte und Links</strong></p>
-      <p>[Placeholder — generate this text with a German Impressum generator.]</p>
     </div>
   </section>
 </Layout>
@@ -129,5 +130,8 @@ import Layout from "../layouts/Layout.astro";
   }
   .legal p {
     margin: 0 0 1.1rem;
+  }
+  .legal a {
+    color: var(--accent-rust-deep);
   }
 </style>

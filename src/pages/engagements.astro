@@ -107,9 +107,9 @@ const engagements = [
 ];
 
 const groups = [
+  { key: "media", label: "Press, radio & podcast", cat: "var(--cat-3)" },
   { key: "talk", label: "Keynotes & talks", cat: "var(--cat-1)" },
   { key: "panel", label: "Panel discussions", cat: "var(--cat-2)" },
-  { key: "media", label: "Press, radio & podcast", cat: "var(--cat-3)" },
 ];
 
 // dated entries newest first, undated ones after, original order preserved within each
@@ -132,21 +132,6 @@ const ordered = (key) =>
   <section class="wrap page">
     <p class="eyebrow">Engagements</p>
     <h1>Talks, panels &amp; media</h1>
-    <p class="lead">
-      A sentence or two about the kinds of events you take part in, and how to invite you.
-      Replace this text.
-    </p>
-
-    <ul class="tally">
-      {
-        groups.map((g) => (
-          <li>
-            <span class="tally-n" style={`color:${g.cat}`}>{ordered(g.key).length}</span>
-            <span class="tally-l">{g.label}</span>
-          </li>
-        ))
-      }
-    </ul>
 
     {
       groups.map((g) => (
@@ -189,44 +174,8 @@ const ordered = (key) =>
     font-size: 2.1rem;
     margin-bottom: 0.8rem;
   }
-  .lead {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 52ch;
-    margin: 0 0 2.5rem;
-  }
-
-  /* at-a-glance spread of formats */
-  .tally {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 2.5rem;
-    margin: 0 0 1rem;
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .tally li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-  }
-  .tally-n {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-  }
-  .tally-l {
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
   .group {
-    margin-top: 3rem;
+    margin-top: 2.5rem;
   }
   .group-head {
     font-size: 1.3rem;
@@ -349,9 +298,6 @@ const ordered = (key) =>
     }
     .body {
       grid-column: 1 / -1;
-    }
-    .tally {
-      gap: 0.6rem 2rem;
     }
   }
 </style>

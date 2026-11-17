@@ -31,18 +31,23 @@
 
   /* Accents */
   --accent: #d97736; /* burnt orange: fills, large type, UI */
-  --accent-deep: #a85c2a; /* 4.61:1 — small accent text on light */
+  --accent-deep: #9e5526; /* small accent text on light: 5.15:1 page, 4.75:1 on hover tint */
   --mustard: #e3b52f; /* 5.09:1 on teal — small text there is fine */
   --mustard-deep: #8a6e1d; /* 4.50:1 on light */
   --red: #c64b48;
   --red-deep: #b03f3c;
   --on-accent: #15201f; /* dark type on orange/mustard fills, never ivory */
 
-  /* Category labels on light grounds, all >= 4.5:1 on --bg */
-  --cat-1: #a85c2a;
-  --cat-2: #8a6e1d;
-  --cat-3: #b03f3c;
-  --cat-4: #2f6b63;
+  /* Row hover tint. Rows sit on --bg normally, so every colour used inside one has to
+     clear 4.5:1 against BOTH grounds — that headroom is why the labels below are a step
+     darker than the minimum that --bg alone would allow. */
+  --surface-hover: #e7efec;
+
+  /* Category labels, all >= 4.5:1 on --bg and on --surface-hover */
+  --cat-1: #9e5526;
+  --cat-2: #80651a;
+  --cat-3: #a63a37;
+  --cat-4: #2a615a;
 
   /* Rounded LinkedIn cards — their own tint so they read as links off-site */
   --link-card-bg: #e7efec;

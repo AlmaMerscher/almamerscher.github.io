@@ -35,15 +35,16 @@ it with `git show cf4671d:<path>` rather than rebuilding from scratch.
 
 ## Design
 
-Two registers. The **home hero** is a midnight-navy band after a reference design Alma
-supplied: deep navy (`--night-*` tokens), bold display sans, name set in two weights, a
-hairline rule, photo bleeding off the bottom-left. The **rest of the site** is warm and
-editorial — cream ground, serif headlines, rust and amber labels.
+Warm editorial throughout: oat hero band, cream page ground, serif headlines, rust and
+amber labels. The **hero** borrows its layout and display typography from a reference
+design Alma supplied — display sans, name set in two weights, a hairline rule, photo
+bleeding off the bottom-left — on a light ground rather than that reference's navy.
 
-The hero photo is **pre-composited onto `--night-bg`** (`alma-portrait-navy-*.webp`).
-The cutout's anti-aliased edge is ~15x brighter than the navy, so letting the browser
-composite the transparent version over a dark ground leaves a visible halo around the
-hair. If `--night-bg` changes, regenerate those files or the fringe returns.
+The hero photo is **pre-composited onto `--hero-bg-1`** (`alma-portrait-oat-*.webp`).
+The cutout's anti-aliased edge is measurably brighter than a dark ground (~15x against
+navy), so compositing the transparent version in the browser can halo around the hair.
+**If the hero colour changes, regenerate those files** or the photo shows a rectangle of
+the old colour. `alma-portrait-*.webp` is the transparent original to regenerate from.
 
 The hero has an explicit `height`, not `min-height`, and the photo is absolutely
 positioned. With the photo in flow, `height: 100%` on a content-sized grid row is
@@ -108,6 +109,10 @@ expand shorteners such as `lnkd.in` to their real destination first.
   `global.css`.
 - Every page sets its own `<title>` via the `title` prop on `Layout`.
 - Write for a general reader, not an academic committee — this is a personal site.
+- **American spelling** (behavior, organized, randomized, synthesize), matching Alma's
+  own writing. Don't drift into British forms.
+- In `.astro` markup, a newline between text and an inline `<a>` collapses to nothing
+  rather than a space. Use `{" "}` or keep them on one line, or words run together.
 
 ## Hosting
 

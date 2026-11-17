@@ -22,12 +22,14 @@
   --cat-3: #8c5a2e;
   --cat-4: #96311f;
 
-  /* Midnight hero, after the reference design: deep navy ground, white display type. */
-  --night-bg: #18212e;
-  --night-bg-rgb: 24, 33, 46;
-  --night-text: #f3f6f9;
-  --night-muted: #93a6ba;
-  --night-rule: rgba(243, 246, 249, 0.22);
+  /* Hero: the reference design's layout and display type, on a light warm ground.
+     --hero-text-muted, not --text-muted: the latter is only 3.69:1 on oat. */
+  --hero-rule: rgba(28, 23, 18, 0.22);
+
+  /* Rounded LinkedIn cards — a deliberately different accent from the rust used
+     elsewhere, so they read as a separate kind of thing. */
+  --link-card-bg: #f6eeda;
+  --link-card-accent: #7a5a12;
 
   --font-serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
   --font-sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;

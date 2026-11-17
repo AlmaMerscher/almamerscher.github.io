@@ -35,16 +35,26 @@ it with `git show cf4671d:<path>` rather than rebuilding from scratch.
 
 ## Design
 
-Warm editorial throughout: oat hero band, cream page ground, serif headlines, rust and
-amber labels. The **hero** borrows its layout and display typography from a reference
-design Alma supplied — display sans, name set in two weights, a hairline rule, photo
-bleeding off the bottom-left — on a light ground rather than that reference's navy.
+Per Alma's design brief: **deep petrol teal `#174B4B` is the identity colour**, warm
+ivory the type on it, **burnt orange the preferred accent**, with golden mustard and warm
+red as secondary accents. Bold, contemporary, editorial. She explicitly rejected beige,
+taupe, sand and cream grounds, so `--bg` is a pale teal-tinted neutral, not a cream.
 
-The hero photo is **pre-composited onto `--hero-bg-1`** (`alma-portrait-oat-*.webp`).
-The cutout's anti-aliased edge is measurably brighter than a dark ground (~15x against
-navy), so compositing the transparent version in the browser can halo around the hair.
-**If the hero colour changes, regenerate those files** or the photo shows a rectangle of
-the old colour. `alma-portrait-*.webp` is the transparent original to regenerate from.
+Teal carries the prominent bands — the hero and the footer. Body pages stay light for
+reading, with teal and orange doing the accent work.
+
+**The brief's accents fail WCAG in several natural placements.** The header comment in
+`global.css` lists the measured ratios and why each derived token exists. The ones that
+bite: burnt orange is large-text/UI only on teal (3.10:1), warm red is unusable on teal
+(2.10:1), and buttons take `--on-accent` dark type, never ivory (ivory on orange is
+2.78:1). Use `--mustard` for small text on teal and `--accent-deep` for small accent text
+on light.
+
+The hero photo is **pre-composited onto `--teal`** (`alma-portrait-teal-*.webp`), because
+the cutout's anti-aliased edge is measurably brighter than a dark ground and haloes
+around the hair otherwise. **If `--teal` changes, regenerate those files** or the photo
+shows a rectangle of the old colour. `alma-portrait-*.webp` is the transparent original
+to regenerate from.
 
 The hero has an explicit `height`, not `min-height`, and the photo is absolutely
 positioned. With the photo in flow, `height: 100%` on a content-sized grid row is

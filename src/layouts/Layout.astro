@@ -135,19 +135,21 @@ const personSchema = {
         font-weight: 500;
       }
       .links a:hover {
-        color: var(--accent-rust);
+        color: var(--accent);
       }
+      /* teal band, so the identity colour closes the page as well as opening it */
       .site-foot {
-        border-top: 1px solid var(--border);
+        background: var(--teal-deep);
+        color: var(--on-teal-muted);
         margin-top: 4rem;
       }
       .foot-inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem;
+        padding: 2rem 1.5rem;
         font-size: 0.8rem;
-        color: var(--text-muted);
+        color: var(--on-teal-muted);
         flex-wrap: wrap;
         gap: 0.75rem;
       }
@@ -158,10 +160,12 @@ const personSchema = {
       }
       .foot-links a {
         text-decoration: none;
-        color: var(--text-muted);
+        color: var(--on-teal-muted);
       }
+      /* mustard, not burnt orange: orange on teal is 3.10:1, below the 4.5
+         needed for links this size */
       .foot-links a:hover {
-        color: var(--accent-rust);
+        color: var(--mustard);
       }
     </style>
   </body>

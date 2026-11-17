@@ -7,12 +7,12 @@ import Layout from "../layouts/Layout.astro";
   description="Psychologist at LMU Munich researching loneliness, social cohesion, and how they relate to political attitudes and behavior."
 >
   <section class="hero">
-    {/* pre-composited onto --hero-bg-1 so the cutout's anti-aliased edge blends exactly
-        into the hero ground. If the hero colour changes, regenerate this file. */}
+    {/* pre-composited onto --teal so the cutout's anti-aliased edge blends exactly into
+        the hero ground. If --teal changes, regenerate this file. */}
     <img
       class="hero-figure"
-      src="/images/alma-portrait-oat-640.webp"
-      srcset="/images/alma-portrait-oat-320.webp 320w, /images/alma-portrait-oat-640.webp 640w"
+      src="/images/alma-portrait-teal-640.webp"
+      srcset="/images/alma-portrait-teal-320.webp 320w, /images/alma-portrait-teal-640.webp 640w"
       sizes="(max-width: 1000px) 260px, 460px"
       width="640"
       height="802"
@@ -102,8 +102,8 @@ import Layout from "../layouts/Layout.astro";
     position: relative;
     overflow: hidden;
     isolation: isolate;
-    background: var(--hero-bg-1);
-    color: var(--text);
+    background: var(--teal);
+    color: var(--on-teal);
     /* explicit height, not min-height: the photo is absolutely positioned so it cannot
        drive the row, and the crop is meant to bleed off the bottom edge */
     height: clamp(440px, 62vh, 580px);
@@ -129,7 +129,7 @@ import Layout from "../layouts/Layout.astro";
     grid-row: 1;
     align-self: center;
     padding: 3rem clamp(1.5rem, 5vw, 4rem) 3rem clamp(1.5rem, 4vw, 3rem);
-    border-left: 1px solid var(--hero-rule);
+    border-left: 1px solid var(--rule-on-teal);
   }
   .hero h1 {
     font-family: var(--font-display);
@@ -139,13 +139,16 @@ import Layout from "../layouts/Layout.astro";
     margin: 0 0 1.1rem;
     display: flex;
     flex-direction: column;
-    color: var(--text);
+    color: var(--on-teal);
   }
   .hero h1 .n1 {
     font-weight: 800;
   }
+  /* the lighter half of the name picks up the accent, so the burnt orange appears
+     at display size where 3.10:1 on teal is fine, rather than in small text */
   .hero h1 .n2 {
     font-weight: 300;
+    color: var(--accent);
   }
   .role {
     font-family: var(--font-display);
@@ -153,7 +156,7 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--hero-text-muted);
+    color: var(--on-teal-muted);
     margin: 0;
   }
 
@@ -162,7 +165,7 @@ import Layout from "../layouts/Layout.astro";
     right: clamp(1.25rem, 4vw, 3rem);
     bottom: clamp(1rem, 3vh, 2rem);
     z-index: 3;
-    color: var(--hero-text-muted);
+    color: var(--on-teal-muted);
     font-size: 1.5rem;
     line-height: 1;
     text-decoration: none;
@@ -170,7 +173,7 @@ import Layout from "../layouts/Layout.astro";
   }
   .scroll-cue:hover,
   .scroll-cue:focus-visible {
-    color: var(--text);
+    color: var(--accent);
     transform: translateY(3px);
   }
 
@@ -275,10 +278,10 @@ import Layout from "../layouts/Layout.astro";
     padding: 1.25rem;
   }
   .signpost:hover {
-    border-color: var(--accent-rust);
+    border-color: var(--accent);
   }
   .signpost .eyebrow {
-    color: var(--accent-rust-deep);
+    color: var(--accent-deep);
   }
   .signpost h2 {
     font-size: 1.15rem;
@@ -309,7 +312,7 @@ import Layout from "../layouts/Layout.astro";
       order: 1;
       padding: 0 0 1.75rem;
       border-left: none;
-      border-bottom: 1px solid var(--hero-rule);
+      border-bottom: 1px solid var(--rule-on-teal);
     }
     .hero-figure {
       order: 2;
